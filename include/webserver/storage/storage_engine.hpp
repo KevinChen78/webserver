@@ -148,14 +148,21 @@ private:
 class StorageEngine {
 public:
     struct Config {
-        std::string data_dir = "./data";
-        size_t memtable_size = 4 * 1024 * 1024; // 4MB flush threshold
-        size_t sstable_size = 16 * 1024 * 1024; // 16MB SSTable size
-        bool enable_wal = true;
-        bool sync_on_write = false;
+        std::string data_dir;
+        size_t memtable_size;
+        size_t sstable_size;
+        bool enable_wal;
+        bool sync_on_write;
+
+        Config()
+            : data_dir("./data"),
+              memtable_size(4 * 1024 * 1024), // 4MB flush threshold
+              sstable_size(16 * 1024 * 1024), // 16MB SSTable size
+              enable_wal(true),
+              sync_on_write(false) {}
     };
 
-    explicit StorageEngine(const Config& config = Config{});
+    explicit StorageEngine(const Config& config = Config());
     ~StorageEngine();
 
     // Initialize engine

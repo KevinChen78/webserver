@@ -1,0 +1,24 @@
+# Total samples (merged across runs): 287287287
+# Unique leaf functions: 19
+
+  Overhead   Samples  Function
+----------  --------  ------------------------------------------------------------
+    30.66%  88088088  pthread_create
+    21.60%  62062062  [libc.so.6]
+     9.76%  28028028  [ld-linux-x86-64.so.2]
+     7.67%  22022022  malloc
+     4.88%  14014014  _dl_allocate_tls_init
+     4.53%  13013013  accept
+     3.48%  10010010  cfree
+     2.44%   7007007  pthread_mutex_unlock
+     2.44%   7007007  std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >::~unique_ptr
+     2.09%   6006006  pthread_mutex_lock
+     2.09%   6006006  pthread_getattr_default_np
+     2.09%   6006006  pthread_detach
+     1.74%   5005005  coro::io::TcpAcceptor::accept
+     1.39%   4004004  std::thread::detach
+     1.05%   3003003  std::thread::_M_start_thread
+     0.70%   2002002  coro::net::http::Server::start
+     0.70%   2002002  __getpagesize
+     0.35%   1001001  malloc@plt
+     0.35%   1001001  __libc_calloc

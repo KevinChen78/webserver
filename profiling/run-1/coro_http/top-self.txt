@@ -1,0 +1,39 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 54  of event 'task-clock:u'
+# Event count (approx.): 54054054
+#
+# Overhead  Command          Shared Object         Symbol                                                                                                                       
+# ........  ...............  ....................  .............................................................................................................................
+#
+    22.22%  coro_http_serve  libc.so.6             [.] pthread_create
+    16.67%  coro_http_serve  libc.so.6             [.] malloc
+     9.26%  coro_http_serve  libc.so.6             [.] cfree
+     5.56%  coro_http_serve  ld-linux-x86-64.so.2  [.] 0x0000000000026b83
+     5.56%  coro_http_serve  libc.so.6             [.] accept
+     3.70%  coro_http_serve  coro_http_server_ns   [.] coro::net::http::Server::start()
+     3.70%  coro_http_serve  libc.so.6             [.] pthread_getattr_default_np
+     3.70%  coro_http_serve  libc.so.6             [.] pthread_mutex_lock
+     3.70%  coro_http_serve  libc.so.6             [.] pthread_mutex_unlock
+     1.85%  coro_http_serve  ld-linux-x86-64.so.2  [.] _dl_allocate_tls_init
+     1.85%  coro_http_serve  ld-linux-x86-64.so.2  [.] 0x0000000000026b80
+     1.85%  coro_http_serve  ld-linux-x86-64.so.2  [.] 0x0000000000026b8b
+     1.85%  coro_http_serve  libc.so.6             [.] __getpagesize
+     1.85%  coro_http_serve  libc.so.6             [.] 0x0000000000098579
+     1.85%  coro_http_serve  libc.so.6             [.] 0x00000000000985d4
+     1.85%  coro_http_serve  libc.so.6             [.] 0x0000000000099029
+     1.85%  coro_http_serve  libc.so.6             [.] 0x000000000009c525
+     1.85%  coro_http_serve  libc.so.6             [.] 0x000000000009c559
+     1.85%  coro_http_serve  libc.so.6             [.] 0x00000000000abb30
+     1.85%  coro_http_serve  libc.so.6             [.] 0x0000000000129c5d
+     1.85%  coro_http_serve  libc.so.6             [.] 0x00000000001894c7
+     1.85%  coro_http_serve  libstdc++.so.6.0.33   [.] malloc@plt
+     1.85%  coro_http_serve  libstdc++.so.6.0.33   [.] std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

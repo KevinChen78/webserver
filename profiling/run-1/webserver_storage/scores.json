@@ -1,0 +1,170 @@
+{
+  "scenario": "webserver storage_bench",
+  "kind": "lib",
+  "composite_score": 60.4,
+  "grade": "C\uff08\u4e2d\u7b49\uff09",
+  "weights": {
+    "K1": 15,
+    "K2": 15,
+    "K3_K4": 15,
+    "K5": 10,
+    "K6": 10,
+    "K7": 10,
+    "K8": 5,
+    "K9": 10,
+    "K10": 10
+  },
+  "kpi_scores": {
+    "K1": 100.0,
+    "K2": 0.0,
+    "K3": 94.4,
+    "K4": 43.7,
+    "K5": 100.0,
+    "K6": 100.0,
+    "K7": 100.0,
+    "K8": 100.0,
+    "K9": 0.0,
+    "K10": 0.0
+  },
+  "kpi_raw": {
+    "K1_top5_sum_pct": 42.59,
+    "K1_top5_funcs": [
+      {
+        "func": "[libc.so.6]",
+        "pct": 22.02
+      },
+      {
+        "func": "std::_Sp_counted_base<",
+        "pct": 6.46
+      },
+      {
+        "func": "std::__cmp_cat::__unspec::__unspec",
+        "pct": 5.0
+      },
+      {
+        "func": "__gnu_cxx::__atomic_add",
+        "pct": 4.76
+      },
+      {
+        "func": "malloc",
+        "pct": 4.35
+      }
+    ],
+    "K2_alloc_pct": 13.55,
+    "K3_lock_pct": 5.56,
+    "K4_atomic_pct": 5.38,
+    "K5_syscall_io_pct": 0.0,
+    "K6_idle_wait_pct": 0.0,
+    "K7_compiler_pct": 0.0,
+    "K8_leaves_in_top90pct": 40,
+    "K9_stack_depth_p50": 14,
+    "K9_stack_depth_p90": 189,
+    "K10_deviation_pct": 42.66
+  },
+  "kpi_matches": {
+    "K2_alloc": [
+      [
+        "__gnu_cxx::__atomic_add",
+        4.76
+      ],
+      [
+        "malloc",
+        4.35
+      ],
+      [
+        "cfree",
+        1.51
+      ],
+      [
+        "operator new",
+        0.88
+      ],
+      [
+        "operator delete",
+        0.78
+      ],
+      [
+        "__gnu_cxx::__exchange_and_add_dispatch",
+        0.65
+      ],
+      [
+        "__gnu_cxx::__atomic_add_dispatch",
+        0.62
+      ]
+    ],
+    "K3_lock": [
+      [
+        "pthread_rwlock_unlock",
+        2.58
+      ],
+      [
+        "pthread_rwlock_wrlock",
+        1.27
+      ],
+      [
+        "pthread_rwlock_rdlock",
+        0.98
+      ],
+      [
+        "pthread_mutex_lock",
+        0.73
+      ]
+    ],
+    "K4_atomic": [
+      [
+        "__gnu_cxx::__atomic_add",
+        4.76
+      ],
+      [
+        "__gnu_cxx::__atomic_add_dispatch",
+        0.62
+      ]
+    ],
+    "K5_syscall_io": [],
+    "K6_idle_wait": [],
+    "K7_compiler_fingerprint": []
+  },
+  "total_folded_samples": 32364364332,
+  "thresholds": {
+    "K1_concentration_top5": [
+      60.0,
+      85.0
+    ],
+    "K2_alloc": [
+      3.0,
+      10.0
+    ],
+    "K3_lock": [
+      5.0,
+      15.0
+    ],
+    "K4_atomic": [
+      2.0,
+      8.0
+    ],
+    "K5_syscall_io_server": [
+      15.0,
+      40.0
+    ],
+    "K5_syscall_io_lib": [
+      5.0,
+      20.0
+    ],
+    "K6_idle_wait": [
+      5.0,
+      20.0
+    ],
+    "K7_compiler_fingerprint": [
+      1.0,
+      5.0
+    ],
+    "K9_stack_depth_p90": [
+      15.0,
+      30.0
+    ],
+    "K10_reproduction": [
+      10.0,
+      30.0
+    ]
+  }
+}

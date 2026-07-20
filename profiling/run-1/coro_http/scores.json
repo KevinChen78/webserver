@@ -1,0 +1,146 @@
+{
+  "scenario": "coro HTTP \u670d\u52a1\u5668\uff08c=32 -k\uff09",
+  "kind": "server",
+  "composite_score": 63.3,
+  "grade": "C\uff08\u4e2d\u7b49\uff09",
+  "weights": {
+    "K1": 15,
+    "K2": 15,
+    "K3_K4": 15,
+    "K5": 10,
+    "K6": 10,
+    "K7": 10,
+    "K8": 5,
+    "K9": 10,
+    "K10": 10
+  },
+  "kpi_scores": {
+    "K1": 41.7,
+    "K2": 0.0,
+    "K3": 100.0,
+    "K4": 100.0,
+    "K5": 100.0,
+    "K6": 100.0,
+    "K7": 100.0,
+    "K8": 40.0,
+    "K9": 100.0,
+    "K10": 0.0
+  },
+  "kpi_raw": {
+    "K1_top5_sum_pct": 74.57,
+    "K1_top5_funcs": [
+      {
+        "func": "pthread_create",
+        "pct": 30.66
+      },
+      {
+        "func": "[libc.so.6]",
+        "pct": 21.6
+      },
+      {
+        "func": "[ld-linux-x86-64.so.2]",
+        "pct": 9.76
+      },
+      {
+        "func": "malloc",
+        "pct": 7.67
+      },
+      {
+        "func": "_dl_allocate_tls_init",
+        "pct": 4.88
+      }
+    ],
+    "K2_alloc_pct": 11.5,
+    "K3_lock_pct": 4.53,
+    "K4_atomic_pct": 0.0,
+    "K5_syscall_io_pct": 6.27,
+    "K6_idle_wait_pct": 0.0,
+    "K7_compiler_pct": 0.0,
+    "K8_leaves_in_top90pct": 11,
+    "K9_stack_depth_p50": 9,
+    "K9_stack_depth_p90": 10,
+    "K10_deviation_pct": 44.47
+  },
+  "kpi_matches": {
+    "K2_alloc": [
+      [
+        "malloc",
+        7.67
+      ],
+      [
+        "cfree",
+        3.48
+      ],
+      [
+        "malloc@plt",
+        0.35
+      ]
+    ],
+    "K3_lock": [
+      [
+        "pthread_mutex_unlock",
+        2.44
+      ],
+      [
+        "pthread_mutex_lock",
+        2.09
+      ]
+    ],
+    "K4_atomic": [],
+    "K5_syscall_io": [
+      [
+        "accept",
+        4.53
+      ],
+      [
+        "coro::io::TcpAcceptor::accept",
+        1.74
+      ]
+    ],
+    "K6_idle_wait": [],
+    "K7_compiler_fingerprint": []
+  },
+  "total_folded_samples": 287287287,
+  "thresholds": {
+    "K1_concentration_top5": [
+      60.0,
+      85.0
+    ],
+    "K2_alloc": [
+      3.0,
+      10.0
+    ],
+    "K3_lock": [
+      5.0,
+      15.0
+    ],
+    "K4_atomic": [
+      2.0,
+      8.0
+    ],
+    "K5_syscall_io_server": [
+      15.0,
+      40.0
+    ],
+    "K5_syscall_io_lib": [
+      5.0,
+      20.0
+    ],
+    "K6_idle_wait": [
+      5.0,
+      20.0
+    ],
+    "K7_compiler_fingerprint": [
+      1.0,
+      5.0
+    ],
+    "K9_stack_depth_p90": [
+      15.0,
+      30.0
+    ],
+    "K10_reproduction": [
+      10.0,
+      30.0
+    ]
+  }
+}

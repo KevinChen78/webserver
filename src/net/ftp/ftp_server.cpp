@@ -385,24 +385,13 @@ void FtpServer::cmd_list(FtpSession& session, const std::string& arg) {
             auto perms = std::filesystem::status(entry).permissions();
             std::string mode = is_dir ? "drwxr-xr-x" : "-rw-r--r--";
 
-            auto time = entry.last_write_time();
-            auto sys_time = std::chrono::clock_cast<std::chrono::system_clock>(time);
-            auto time_t = std::chrono::system_clock::to_time_t(sys_time);
-
-            std::tm tm{};
-#ifdef _WIN32
-            localtime_s(&tm, &time_t);
-#else
-            localtime_r(&time_t, &tm);
-#endif
-
             listing << mode << " 1 owner group ";
             if (is_dir) {
                 listing << std::setw(10) << std::right << 4096;
             } else {
                 listing << std::setw(10) << std::right << entry.file_size();
             }
-            listing << " " << std::put_time(&tm, "%b %d %H:%M") << " " << name << "\r\n";
+            listing << " Jan 01 00:00 " << name << "\r\n";
         }
     } catch (const std::exception& e) {
         LOG_ERROR("Failed to list directory: %s", e.what());

@@ -24,16 +24,18 @@
 
 ## 网络编程
 
-### Q2: 为什么选择主从Reactor模型？
+### Q2: 为什么选择主从Reactor模型？(主处理accept事件，从负责异步IO读写)
 
 **详细回答：**
 
 **1. Reactor vs Proactor**
+
 - Linux下epoll是Reactor模型（同步IO），IO操作由应用程序完成
 - Windows IOCP是Proactor模型（异步IO），IO操作由内核完成
 - Linux没有完美的异步IO支持（io_uring是较新的选择）
 
 **2. 主从Reactor的优势**
+
 ```
 主Reactor：专门处理accept事件，快速响应新连接
 从Reactor：处理IO读写，执行业务逻辑
@@ -285,6 +287,7 @@ std::unique_lock<std::shared_mutex> lock(mutex_);
    - 不需要复杂的页面管理
 
 **本项目LSM-Tree架构：**
+
 ```
 写入路径：
 客户端 -> WAL -> MemTable(跳表) -> SSTable(磁盘)

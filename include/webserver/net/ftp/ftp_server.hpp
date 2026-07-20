@@ -75,15 +75,23 @@ struct FtpSession {
 class FtpServer {
 public:
     struct Config {
-        std::string bind_address = "0.0.0.0";
-        int port = 2121;              // FTP control port (2121 to avoid needing root)
-        std::string root_dir = "./ftp_root";
-        std::string welcome_message = "Welcome to WebServer FTP";
-        bool allow_anonymous = false;
-        size_t max_connections = 100;
+        std::string bind_address;
+        int port;
+        std::string root_dir;
+        std::string welcome_message;
+        bool allow_anonymous;
+        size_t max_connections;
+
+        Config()
+            : bind_address("0.0.0.0"),
+              port(2121),
+              root_dir("./ftp_root"),
+              welcome_message("Welcome to WebServer FTP"),
+              allow_anonymous(false),
+              max_connections(100) {}
     };
 
-    explicit FtpServer(const Config& config = Config{});
+    explicit FtpServer(const Config& config = Config());
     ~FtpServer();
 
     // Start FTP server

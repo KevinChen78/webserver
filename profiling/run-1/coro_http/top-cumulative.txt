@@ -1,0 +1,2469 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 393  of event 'task-clock:ppp'
+# Event count (approx.): 3969696930
+#
+# Children      Self  Command          Shared Object         Symbol                                                                                                                           
+# ........  ........  ...............  ....................  .................................................................................................................................
+#
+   100.00%     0.00%  coro_http_serve  libc.so.6             [.] 0x00007bf1bf129c6b
+            |
+            ---0x7bf1bf129c6b
+
+   100.00%     0.00%  coro_http_serve  libc.so.6             [.] 0x00007bf1bf09caa3
+            |
+            ---0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+   100.00%     0.00%  coro_http_serve  libstdc++.so.6.0.33   [.] 0x00007bf1bf4ecdb3
+            |
+            ---0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+   100.00%     0.00%  coro_http_serve  coro_http_server_ns   [.] coro::net::http::Server::start()
+            |
+            ---coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    96.18%     0.00%  coro_http_serve  coro_http_server_ns   [.] std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+            |
+            ---std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    95.93%     0.00%  coro_http_serve  libstdc++.so.6.0.33   [.] std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+            |
+            ---std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    95.93%     1.02%  coro_http_serve  libc.so.6             [.] pthread_create
+            |
+            ---pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    95.42%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] entry_SYSCALL_64_after_hwframe
+            |
+            ---entry_SYSCALL_64_after_hwframe
+               |          
+               |--89.57%--0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--2.80%--accept
+               |          coro::io::TcpAcceptor::accept() (inlined)
+               |          coro::io::TcpListener::accept() (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--1.27%--__mprotect
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--1.02%--pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+                --0.51%--__mmap
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+    95.42%     0.51%  coro_http_serve  [kernel.kallsyms]     [k] do_syscall_64
+            |
+            ---do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               |          
+               |--89.57%--0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--2.80%--accept
+               |          coro::io::TcpAcceptor::accept() (inlined)
+               |          coro::io::TcpListener::accept() (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--1.27%--__mprotect
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--1.02%--pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+                --0.51%--__mmap
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+    94.91%     0.51%  coro_http_serve  [kernel.kallsyms]     [k] x64_sys_call
+            |
+            ---x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               |          
+               |--89.31%--0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--2.80%--accept
+               |          coro::io::TcpAcceptor::accept() (inlined)
+               |          coro::io::TcpListener::accept() (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--1.27%--__mprotect
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--0.76%--pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+                --0.51%--__mmap
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+    90.33%     0.00%  coro_http_serve  libc.so.6             [.] 0x00007bf1bf09c54f
+            |
+            ---0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    90.33%     0.00%  coro_http_serve  libc.so.6             [.] 0x00007bf1bf129c5d
+            |
+            ---0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    89.31%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __x64_sys_clone3
+            |
+            ---__x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    89.31%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __do_sys_clone3
+            |
+            ---__do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    89.31%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] kernel_clone
+            |
+            ---kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    63.36%     0.25%  coro_http_serve  [kernel.kallsyms]     [k] copy_process
+            |
+            ---copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    46.31%    46.31%  coro_http_serve  [kernel.kallsyms]     [k] _raw_spin_unlock_irqrestore
+            |
+            ---_raw_spin_unlock_irqrestore
+               |          
+               |--24.94%--wake_up_new_task
+               |          kernel_clone
+               |          __do_sys_clone3
+               |          __x64_sys_clone3
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--14.50%--__wake_up_sync_key
+               |          sock_def_readable
+               |          __netlink_sendskb
+               |          netlink_broadcast_filtered
+               |          cn_netlink_send_mult
+               |          proc_fork_connector
+               |          copy_process
+               |          kernel_clone
+               |          __do_sys_clone3
+               |          __x64_sys_clone3
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--4.83%--inherit_event.isra.0
+               |          inherit_task_group.isra.0
+               |          perf_event_init_task
+               |          copy_process
+               |          kernel_clone
+               |          __do_sys_clone3
+               |          __x64_sys_clone3
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--0.51%--add_device_randomness
+               |          kernel_clone
+               |          __do_sys_clone3
+               |          __x64_sys_clone3
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+                --0.51%--perf_event_init_task
+                          copy_process
+                          kernel_clone
+                          __do_sys_clone3
+                          __x64_sys_clone3
+                          x64_sys_call
+                          do_syscall_64
+                          entry_SYSCALL_64_after_hwframe
+                          0x7bf1bf129c5d
+                          0x7bf1bf09c54f
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+    32.82%     0.51%  coro_http_serve  [kernel.kallsyms]     [k] perf_event_init_task
+            |
+            ---perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    32.06%     1.53%  coro_http_serve  [kernel.kallsyms]     [k] inherit_task_group.isra.0
+            |
+            ---inherit_task_group.isra.0
+               |          
+                --31.81%--perf_event_init_task
+                          copy_process
+                          kernel_clone
+                          __do_sys_clone3
+                          __x64_sys_clone3
+                          x64_sys_call
+                          do_syscall_64
+                          entry_SYSCALL_64_after_hwframe
+                          0x7bf1bf129c5d
+                          0x7bf1bf09c54f
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+    30.03%     1.78%  coro_http_serve  [kernel.kallsyms]     [k] inherit_event.isra.0
+            |
+            ---inherit_event.isra.0
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    24.94%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] wake_up_new_task
+            |
+            ---wake_up_new_task
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    16.79%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] proc_fork_connector
+            |
+            ---proc_fork_connector
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    16.79%     0.51%  coro_http_serve  [kernel.kallsyms]     [k] cn_netlink_send_mult
+            |
+            ---cn_netlink_send_mult
+               proc_fork_connector
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    15.27%     0.25%  coro_http_serve  [kernel.kallsyms]     [k] netlink_broadcast_filtered
+            |
+            ---netlink_broadcast_filtered
+               cn_netlink_send_mult
+               proc_fork_connector
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    15.01%     5.60%  coro_http_serve  [kernel.kallsyms]     [k] perf_event_alloc
+            |
+            ---perf_event_alloc
+               inherit_event.isra.0
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    14.76%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __netlink_sendskb
+            |
+            ---__netlink_sendskb
+               netlink_broadcast_filtered
+               cn_netlink_send_mult
+               proc_fork_connector
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    14.50%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] sock_def_readable
+            |
+            ---sock_def_readable
+               __netlink_sendskb
+               netlink_broadcast_filtered
+               cn_netlink_send_mult
+               proc_fork_connector
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+    14.50%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __wake_up_sync_key
+            |
+            ---__wake_up_sync_key
+               sock_def_readable
+               __netlink_sendskb
+               netlink_broadcast_filtered
+               cn_netlink_send_mult
+               proc_fork_connector
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     7.12%     1.27%  coro_http_serve  [kernel.kallsyms]     [k] kmem_cache_alloc_node_noprof
+            |
+            ---kmem_cache_alloc_node_noprof
+               |          
+               |--4.83%--perf_event_alloc
+               |          inherit_event.isra.0
+               |          inherit_task_group.isra.0
+               |          perf_event_init_task
+               |          copy_process
+               |          kernel_clone
+               |          __do_sys_clone3
+               |          __x64_sys_clone3
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+                --2.04%--copy_process
+                          kernel_clone
+                          __do_sys_clone3
+                          __x64_sys_clone3
+                          x64_sys_call
+                          do_syscall_64
+                          entry_SYSCALL_64_after_hwframe
+                          0x7bf1bf129c5d
+                          0x7bf1bf09c54f
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+     5.85%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __slab_alloc.isra.0
+            |
+            ---__slab_alloc.isra.0
+               |          
+                --5.34%--kmem_cache_alloc_node_noprof
+                          |          
+                          |--4.07%--perf_event_alloc
+                          |          inherit_event.isra.0
+                          |          inherit_task_group.isra.0
+                          |          perf_event_init_task
+                          |          copy_process
+                          |          kernel_clone
+                          |          __do_sys_clone3
+                          |          __x64_sys_clone3
+                          |          x64_sys_call
+                          |          do_syscall_64
+                          |          entry_SYSCALL_64_after_hwframe
+                          |          0x7bf1bf129c5d
+                          |          0x7bf1bf09c54f
+                          |          pthread_create
+                          |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          |          coro::net::http::Server::start()
+                          |          0x7bf1bf4ecdb3
+                          |          0x7bf1bf09caa3
+                          |          0x7bf1bf129c6b
+                          |          
+                           --1.27%--copy_process
+                                     kernel_clone
+                                     __do_sys_clone3
+                                     __x64_sys_clone3
+                                     x64_sys_call
+                                     do_syscall_64
+                                     entry_SYSCALL_64_after_hwframe
+                                     0x7bf1bf129c5d
+                                     0x7bf1bf09c54f
+                                     pthread_create
+                                     std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                                     std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                                     coro::net::http::Server::start()
+                                     0x7bf1bf4ecdb3
+                                     0x7bf1bf09caa3
+                                     0x7bf1bf129c6b
+
+     5.85%     0.76%  coro_http_serve  [kernel.kallsyms]     [k] ___slab_alloc
+            |
+            ---___slab_alloc
+               __slab_alloc.isra.0
+               |          
+                --5.34%--kmem_cache_alloc_node_noprof
+                          |          
+                          |--4.07%--perf_event_alloc
+                          |          inherit_event.isra.0
+                          |          inherit_task_group.isra.0
+                          |          perf_event_init_task
+                          |          copy_process
+                          |          kernel_clone
+                          |          __do_sys_clone3
+                          |          __x64_sys_clone3
+                          |          x64_sys_call
+                          |          do_syscall_64
+                          |          entry_SYSCALL_64_after_hwframe
+                          |          0x7bf1bf129c5d
+                          |          0x7bf1bf09c54f
+                          |          pthread_create
+                          |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          |          coro::net::http::Server::start()
+                          |          0x7bf1bf4ecdb3
+                          |          0x7bf1bf09caa3
+                          |          0x7bf1bf129c6b
+                          |          
+                           --1.27%--copy_process
+                                     kernel_clone
+                                     __do_sys_clone3
+                                     __x64_sys_clone3
+                                     x64_sys_call
+                                     do_syscall_64
+                                     entry_SYSCALL_64_after_hwframe
+                                     0x7bf1bf129c5d
+                                     0x7bf1bf09c54f
+                                     pthread_create
+                                     std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                                     std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                                     coro::net::http::Server::start()
+                                     0x7bf1bf4ecdb3
+                                     0x7bf1bf09caa3
+                                     0x7bf1bf129c6b
+
+     4.83%     0.25%  coro_http_serve  [kernel.kallsyms]     [k] allocate_slab
+            |
+            ---allocate_slab
+               ___slab_alloc
+               __slab_alloc.isra.0
+               |          
+                --4.58%--kmem_cache_alloc_node_noprof
+                          |          
+                          |--3.31%--perf_event_alloc
+                          |          inherit_event.isra.0
+                          |          inherit_task_group.isra.0
+                          |          perf_event_init_task
+                          |          copy_process
+                          |          kernel_clone
+                          |          __do_sys_clone3
+                          |          __x64_sys_clone3
+                          |          x64_sys_call
+                          |          do_syscall_64
+                          |          entry_SYSCALL_64_after_hwframe
+                          |          0x7bf1bf129c5d
+                          |          0x7bf1bf09c54f
+                          |          pthread_create
+                          |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          |          coro::net::http::Server::start()
+                          |          0x7bf1bf4ecdb3
+                          |          0x7bf1bf09caa3
+                          |          0x7bf1bf129c6b
+                          |          
+                           --1.27%--copy_process
+                                     kernel_clone
+                                     __do_sys_clone3
+                                     __x64_sys_clone3
+                                     x64_sys_call
+                                     do_syscall_64
+                                     entry_SYSCALL_64_after_hwframe
+                                     0x7bf1bf129c5d
+                                     0x7bf1bf09c54f
+                                     pthread_create
+                                     std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                                     std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                                     coro::net::http::Server::start()
+                                     0x7bf1bf4ecdb3
+                                     0x7bf1bf09caa3
+                                     0x7bf1bf129c6b
+
+     4.07%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __vmalloc_node_noprof
+            |
+            ---__vmalloc_node_noprof
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     4.07%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __vmalloc_node_range_noprof
+            |
+            ---__vmalloc_node_range_noprof
+               __vmalloc_node_noprof
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     4.07%     4.07%  coro_http_serve  [kernel.kallsyms]     [k] memset_orig
+            |
+            ---memset_orig
+               |          
+               |--2.04%--perf_event_alloc
+               |          inherit_event.isra.0
+               |          inherit_task_group.isra.0
+               |          perf_event_init_task
+               |          copy_process
+               |          kernel_clone
+               |          __do_sys_clone3
+               |          __x64_sys_clone3
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--0.76%--copy_process
+               |          kernel_clone
+               |          __do_sys_clone3
+               |          __x64_sys_clone3
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+               |--0.51%--lsm_blob_alloc
+               |          security_perf_event_alloc
+               |          perf_event_alloc
+               |          inherit_event.isra.0
+               |          inherit_task_group.isra.0
+               |          perf_event_init_task
+               |          copy_process
+               |          kernel_clone
+               |          __do_sys_clone3
+               |          __x64_sys_clone3
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+                --0.51%--find_get_pmu_context
+                          inherit_event.isra.0
+                          inherit_task_group.isra.0
+                          perf_event_init_task
+                          copy_process
+                          kernel_clone
+                          __do_sys_clone3
+                          __x64_sys_clone3
+                          x64_sys_call
+                          do_syscall_64
+                          entry_SYSCALL_64_after_hwframe
+                          0x7bf1bf129c5d
+                          0x7bf1bf09c54f
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+     4.07%     0.25%  coro_http_serve  [kernel.kallsyms]     [k] __alloc_frozen_pages_noprof
+            |
+            ---__alloc_frozen_pages_noprof
+               |          
+               |--2.54%--allocate_slab
+               |          ___slab_alloc
+               |          __slab_alloc.isra.0
+               |          kmem_cache_alloc_node_noprof
+               |          perf_event_alloc
+               |          inherit_event.isra.0
+               |          inherit_task_group.isra.0
+               |          perf_event_init_task
+               |          copy_process
+               |          kernel_clone
+               |          __do_sys_clone3
+               |          __x64_sys_clone3
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+                --1.53%--alloc_pages_mpol
+                          alloc_frozen_pages_noprof
+                          allocate_slab
+                          ___slab_alloc
+                          __slab_alloc.isra.0
+                          |          
+                           --1.27%--kmem_cache_alloc_node_noprof
+                                     copy_process
+                                     kernel_clone
+                                     __do_sys_clone3
+                                     __x64_sys_clone3
+                                     x64_sys_call
+                                     do_syscall_64
+                                     entry_SYSCALL_64_after_hwframe
+                                     0x7bf1bf129c5d
+                                     0x7bf1bf09c54f
+                                     pthread_create
+                                     std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                                     std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                                     coro::net::http::Server::start()
+                                     0x7bf1bf4ecdb3
+                                     0x7bf1bf09caa3
+                                     0x7bf1bf129c6b
+
+     3.82%     0.00%  coro_http_serve  coro_http_server_ns   [.] coro::io::TcpListener::accept() (inlined)
+            |
+            ---coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     3.82%     0.00%  coro_http_serve  coro_http_server_ns   [.] coro::io::TcpAcceptor::accept() (inlined)
+            |
+            ---coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     3.82%     0.25%  coro_http_serve  libc.so.6             [.] accept
+            |
+            ---accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     3.82%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] find_get_pmu_context
+            |
+            ---find_get_pmu_context
+               inherit_event.isra.0
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     3.56%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] alloc_pages_bulk_mempolicy_noprof
+            |
+            ---alloc_pages_bulk_mempolicy_noprof
+               __vmalloc_node_range_noprof
+               __vmalloc_node_noprof
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     3.56%     0.51%  coro_http_serve  [kernel.kallsyms]     [k] alloc_pages_bulk_noprof
+            |
+            ---alloc_pages_bulk_noprof
+               alloc_pages_bulk_mempolicy_noprof
+               __vmalloc_node_range_noprof
+               __vmalloc_node_noprof
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     3.56%     3.56%  coro_http_serve  [kernel.kallsyms]     [k] clear_page_erms
+            |
+            ---clear_page_erms
+               __alloc_frozen_pages_noprof
+               |          
+               |--2.04%--allocate_slab
+               |          ___slab_alloc
+               |          __slab_alloc.isra.0
+               |          kmem_cache_alloc_node_noprof
+               |          perf_event_alloc
+               |          inherit_event.isra.0
+               |          inherit_task_group.isra.0
+               |          perf_event_init_task
+               |          copy_process
+               |          kernel_clone
+               |          __do_sys_clone3
+               |          __x64_sys_clone3
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+                --1.53%--alloc_pages_mpol
+                          alloc_frozen_pages_noprof
+                          allocate_slab
+                          ___slab_alloc
+                          __slab_alloc.isra.0
+                          |          
+                           --1.27%--kmem_cache_alloc_node_noprof
+                                     copy_process
+                                     kernel_clone
+                                     __do_sys_clone3
+                                     __x64_sys_clone3
+                                     x64_sys_call
+                                     do_syscall_64
+                                     entry_SYSCALL_64_after_hwframe
+                                     0x7bf1bf129c5d
+                                     0x7bf1bf09c54f
+                                     pthread_create
+                                     std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                                     std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                                     coro::net::http::Server::start()
+                                     0x7bf1bf4ecdb3
+                                     0x7bf1bf09caa3
+                                     0x7bf1bf129c6b
+
+     2.80%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __x64_sys_accept
+            |
+            ---__x64_sys_accept
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     2.80%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __sys_accept4
+            |
+            ---__sys_accept4
+               __x64_sys_accept
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     2.80%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] do_accept
+            |
+            ---do_accept
+               __sys_accept4
+               __x64_sys_accept
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     2.29%     0.76%  coro_http_serve  [kernel.kallsyms]     [k] __rmqueue_pcplist
+            |
+            ---__rmqueue_pcplist
+               alloc_pages_bulk_noprof
+               alloc_pages_bulk_mempolicy_noprof
+               __vmalloc_node_range_noprof
+               __vmalloc_node_noprof
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     2.04%     2.04%  coro_http_serve  [kernel.kallsyms]     [k] _raw_spin_unlock_irq
+            |
+            ---_raw_spin_unlock_irq
+               |          
+               |--1.02%--find_get_pmu_context
+               |          inherit_event.isra.0
+               |          inherit_task_group.isra.0
+               |          perf_event_init_task
+               |          copy_process
+               |          kernel_clone
+               |          __do_sys_clone3
+               |          __x64_sys_clone3
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+                --0.51%--cgroup_can_fork
+                          copy_process
+                          kernel_clone
+                          __do_sys_clone3
+                          __x64_sys_clone3
+                          x64_sys_call
+                          do_syscall_64
+                          entry_SYSCALL_64_after_hwframe
+                          0x7bf1bf129c5d
+                          0x7bf1bf09c54f
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+     1.78%     0.76%  coro_http_serve  [kernel.kallsyms]     [k] __memcg_slab_post_alloc_hook
+            |
+            ---__memcg_slab_post_alloc_hook
+               |          
+               |--1.02%--kmem_cache_alloc_lru_noprof
+               |          |          
+               |           --0.76%--__d_alloc
+               |                     d_alloc_pseudo
+               |                     alloc_file_pseudo
+               |                     sock_alloc_file
+               |                     do_accept
+               |                     __sys_accept4
+               |                     __x64_sys_accept
+               |                     x64_sys_call
+               |                     do_syscall_64
+               |                     entry_SYSCALL_64_after_hwframe
+               |                     accept
+               |                     coro::io::TcpAcceptor::accept() (inlined)
+               |                     coro::io::TcpListener::accept() (inlined)
+               |                     coro::net::http::Server::start()
+               |                     0x7bf1bf4ecdb3
+               |                     0x7bf1bf09caa3
+               |                     0x7bf1bf129c6b
+               |          
+                --0.51%--kmem_cache_alloc_node_noprof
+                          copy_process
+                          kernel_clone
+                          __do_sys_clone3
+                          __x64_sys_clone3
+                          x64_sys_call
+                          do_syscall_64
+                          entry_SYSCALL_64_after_hwframe
+                          0x7bf1bf129c5d
+                          0x7bf1bf09c54f
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+     1.78%     1.78%  coro_http_serve  [kernel.kallsyms]     [k] kfree
+            |
+            ---kfree
+               find_get_pmu_context
+               inherit_event.isra.0
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.78%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] security_perf_event_alloc
+            |
+            ---security_perf_event_alloc
+               perf_event_alloc
+               inherit_event.isra.0
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.78%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] lsm_blob_alloc
+            |
+            ---lsm_blob_alloc
+               security_perf_event_alloc
+               perf_event_alloc
+               inherit_event.isra.0
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.53%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] perf_iterate_sb.constprop.0
+            |
+            ---perf_iterate_sb.constprop.0
+               |          
+               |--1.02%--perf_event_task
+               |          perf_event_fork
+               |          copy_process
+               |          kernel_clone
+               |          __do_sys_clone3
+               |          __x64_sys_clone3
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+                --0.51%--perf_event_mmap
+
+     1.53%     1.53%  coro_http_serve  [kernel.kallsyms]     [k] _raw_spin_lock
+            |
+            ---_raw_spin_lock
+               |          
+                --1.02%--inherit_event.isra.0
+                          inherit_task_group.isra.0
+                          perf_event_init_task
+                          copy_process
+                          kernel_clone
+                          __do_sys_clone3
+                          __x64_sys_clone3
+                          x64_sys_call
+                          do_syscall_64
+                          entry_SYSCALL_64_after_hwframe
+                          0x7bf1bf129c5d
+                          0x7bf1bf09c54f
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+     1.53%     1.27%  coro_http_serve  [kernel.kallsyms]     [k] perf_iterate_ctx
+            |
+            ---perf_iterate_ctx
+               perf_iterate_sb.constprop.0
+               |          
+               |--1.02%--perf_event_task
+               |          perf_event_fork
+               |          copy_process
+               |          kernel_clone
+               |          __do_sys_clone3
+               |          __x64_sys_clone3
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          0x7bf1bf129c5d
+               |          0x7bf1bf09c54f
+               |          pthread_create
+               |          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               |          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+                --0.51%--perf_event_mmap
+
+     1.53%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] alloc_frozen_pages_noprof
+            |
+            ---alloc_frozen_pages_noprof
+               allocate_slab
+               ___slab_alloc
+               __slab_alloc.isra.0
+               |          
+                --1.27%--kmem_cache_alloc_node_noprof
+                          copy_process
+                          kernel_clone
+                          __do_sys_clone3
+                          __x64_sys_clone3
+                          x64_sys_call
+                          do_syscall_64
+                          entry_SYSCALL_64_after_hwframe
+                          0x7bf1bf129c5d
+                          0x7bf1bf09c54f
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+     1.53%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] alloc_pages_mpol
+            |
+            ---alloc_pages_mpol
+               alloc_frozen_pages_noprof
+               allocate_slab
+               ___slab_alloc
+               __slab_alloc.isra.0
+               |          
+                --1.27%--kmem_cache_alloc_node_noprof
+                          copy_process
+                          kernel_clone
+                          __do_sys_clone3
+                          __x64_sys_clone3
+                          x64_sys_call
+                          do_syscall_64
+                          entry_SYSCALL_64_after_hwframe
+                          0x7bf1bf129c5d
+                          0x7bf1bf09c54f
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+     1.27%     0.00%  coro_http_serve  libc.so.6             [.] __mprotect
+            |
+            ---__mprotect
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.27%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __x64_sys_mprotect
+            |
+            ---__x64_sys_mprotect
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               __mprotect
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.27%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] do_mprotect_pkey
+            |
+            ---do_mprotect_pkey
+               __x64_sys_mprotect
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               __mprotect
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.27%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] sock_alloc_file
+            |
+            ---sock_alloc_file
+               do_accept
+               __sys_accept4
+               __x64_sys_accept
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.27%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] alloc_file_pseudo
+            |
+            ---alloc_file_pseudo
+               sock_alloc_file
+               do_accept
+               __sys_accept4
+               __x64_sys_accept
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.27%     1.27%  coro_http_serve  [kernel.kallsyms]     [k] rb_next
+            |
+            ---rb_next
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.27%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] kmem_cache_alloc_lru_noprof
+            |
+            ---kmem_cache_alloc_lru_noprof
+               |          
+               |--0.76%--__d_alloc
+               |          d_alloc_pseudo
+               |          alloc_file_pseudo
+               |          sock_alloc_file
+               |          do_accept
+               |          __sys_accept4
+               |          __x64_sys_accept
+               |          x64_sys_call
+               |          do_syscall_64
+               |          entry_SYSCALL_64_after_hwframe
+               |          accept
+               |          coro::io::TcpAcceptor::accept() (inlined)
+               |          coro::io::TcpListener::accept() (inlined)
+               |          coro::net::http::Server::start()
+               |          0x7bf1bf4ecdb3
+               |          0x7bf1bf09caa3
+               |          0x7bf1bf129c6b
+               |          
+                --0.51%--sock_alloc_inode
+                          alloc_inode
+                          sock_alloc
+                          do_accept
+                          __sys_accept4
+                          __x64_sys_accept
+                          x64_sys_call
+                          do_syscall_64
+                          entry_SYSCALL_64_after_hwframe
+                          accept
+                          coro::io::TcpAcceptor::accept() (inlined)
+                          coro::io::TcpListener::accept() (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+     1.27%     1.27%  coro_http_serve  [kernel.kallsyms]     [k] __list_del_entry_valid_or_report
+            |
+            ---__list_del_entry_valid_or_report
+               __rmqueue_pcplist
+               alloc_pages_bulk_noprof
+               alloc_pages_bulk_mempolicy_noprof
+               __vmalloc_node_range_noprof
+               __vmalloc_node_noprof
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.27%     1.27%  coro_http_serve  [kernel.kallsyms]     [k] __kmalloc_noprof
+            |
+            ---__kmalloc_noprof
+               lsm_blob_alloc
+               security_perf_event_alloc
+               perf_event_alloc
+               inherit_event.isra.0
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.02%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] perf_event_fork
+            |
+            ---perf_event_fork
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.02%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] perf_event_task
+            |
+            ---perf_event_task
+               perf_event_fork
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.02%     1.02%  coro_http_serve  [kernel.kallsyms]     [k] __mutex_init
+            |
+            ---__mutex_init
+               inherit_event.isra.0
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.02%     1.02%  coro_http_serve  [kernel.kallsyms]     [k] mutex_lock
+            |
+            ---mutex_lock
+               inherit_event.isra.0
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     1.02%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] _raw_spin_unlock
+            |
+            ---_raw_spin_unlock
+               |          
+                --0.76%--alloc_pages_bulk_noprof
+                          alloc_pages_bulk_mempolicy_noprof
+                          __vmalloc_node_range_noprof
+                          __vmalloc_node_noprof
+                          copy_process
+                          kernel_clone
+                          __do_sys_clone3
+                          __x64_sys_clone3
+                          x64_sys_call
+                          do_syscall_64
+                          entry_SYSCALL_64_after_hwframe
+                          0x7bf1bf129c5d
+                          0x7bf1bf09c54f
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+     1.02%     1.02%  coro_http_serve  [kernel.kallsyms]     [k] __raw_callee_save___pv_queued_spin_unlock
+            |
+            ---__raw_callee_save___pv_queued_spin_unlock
+               _raw_spin_unlock
+               |          
+                --0.76%--alloc_pages_bulk_noprof
+                          alloc_pages_bulk_mempolicy_noprof
+                          __vmalloc_node_range_noprof
+                          __vmalloc_node_noprof
+                          copy_process
+                          kernel_clone
+                          __do_sys_clone3
+                          __x64_sys_clone3
+                          x64_sys_call
+                          do_syscall_64
+                          entry_SYSCALL_64_after_hwframe
+                          0x7bf1bf129c5d
+                          0x7bf1bf09c54f
+                          pthread_create
+                          std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+                          std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+                          coro::net::http::Server::start()
+                          0x7bf1bf4ecdb3
+                          0x7bf1bf09caa3
+                          0x7bf1bf129c6b
+
+     0.76%     0.76%  coro_http_serve  libc.so.6             [.] 0x0000000000129c5d
+            |
+            ---0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.76%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] inet_accept
+            |
+            ---inet_accept
+               do_accept
+               __sys_accept4
+               __x64_sys_accept
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.76%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] sock_alloc
+            |
+            ---sock_alloc
+               do_accept
+               __sys_accept4
+               __x64_sys_accept
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.76%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] alloc_inode
+            |
+            ---alloc_inode
+               sock_alloc
+               do_accept
+               __sys_accept4
+               __x64_sys_accept
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.76%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] d_alloc_pseudo
+            |
+            ---d_alloc_pseudo
+               alloc_file_pseudo
+               sock_alloc_file
+               do_accept
+               __sys_accept4
+               __x64_sys_accept
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.76%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __d_alloc
+            |
+            ---__d_alloc
+               d_alloc_pseudo
+               alloc_file_pseudo
+               sock_alloc_file
+               do_accept
+               __sys_accept4
+               __x64_sys_accept
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.76%     0.76%  coro_http_serve  [kernel.kallsyms]     [k] perf_event__header_size
+            |
+            ---perf_event__header_size
+               inherit_event.isra.0
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.51%  coro_http_serve  libc.so.6             [.] 0x0000000000098563
+            |
+            ---0x7bf1bf098563
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  ld-linux-x86-64.so.2  [.] _dl_allocate_tls_init
+            |
+            ---_dl_allocate_tls_init
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  libc.so.6             [.] __mmap
+            |
+            ---__mmap
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  libc.so.6             [.] 0x00007bf1bf098563
+            |
+            ---0x7bf1bf098563
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __x64_sys_mmap
+            |
+            ---__x64_sys_mmap
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               __mmap
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] ksys_mmap_pgoff
+            |
+            ---ksys_mmap_pgoff
+               __x64_sys_mmap
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               __mmap
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] down_write_killable
+            |
+            ---down_write_killable
+               do_mprotect_pkey
+               __x64_sys_mprotect
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               __mprotect
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] mprotect_fixup
+            |
+            ---mprotect_fixup
+               do_mprotect_pkey
+               __x64_sys_mprotect
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               __mprotect
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] vm_mmap_pgoff
+            |
+            ---vm_mmap_pgoff
+               ksys_mmap_pgoff
+               __x64_sys_mmap
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               __mmap
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.51%  coro_http_serve  [kernel.kallsyms]     [k] rwsem_down_write_slowpath
+            |
+            ---rwsem_down_write_slowpath
+               down_write_killable
+               do_mprotect_pkey
+               __x64_sys_mprotect
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               __mprotect
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.25%  coro_http_serve  [kernel.kallsyms]     [k] inet_csk_accept
+            |
+            ---inet_csk_accept
+               inet_accept
+               do_accept
+               __sys_accept4
+               __x64_sys_accept
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] do_mmap
+            |
+            ---do_mmap
+               vm_mmap_pgoff
+               ksys_mmap_pgoff
+               __x64_sys_mmap
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               __mmap
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] add_device_randomness
+            |
+            ---add_device_randomness
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] sock_alloc_inode
+            |
+            ---sock_alloc_inode
+               alloc_inode
+               sock_alloc
+               do_accept
+               __sys_accept4
+               __x64_sys_accept
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               accept
+               coro::io::TcpAcceptor::accept() (inlined)
+               coro::io::TcpListener::accept() (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.51%  coro_http_serve  [kernel.kallsyms]     [k] copy_thread
+            |
+            ---copy_thread
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.51%  coro_http_serve  [kernel.kallsyms]     [k] memcg_charge_kernel_stack.part.0
+            |
+            ---memcg_charge_kernel_stack.part.0
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.51%  coro_http_serve  [kernel.kallsyms]     [k] rb_first
+            |
+            ---rb_first
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] alloc_pid
+            |
+            ---alloc_pid
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] cgroup_can_fork
+            |
+            ---cgroup_can_fork
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] perf_event_mmap
+            |
+            ---perf_event_mmap
+
+     0.51%     0.51%  coro_http_serve  [kernel.kallsyms]     [k] mutex_unlock
+            |
+            ---mutex_unlock
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.51%  coro_http_serve  [kernel.kallsyms]     [k] netlink_has_listeners
+            |
+            ---netlink_has_listeners
+               cn_netlink_send_mult
+               proc_fork_connector
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __alloc_skb
+            |
+            ---__alloc_skb
+               cn_netlink_send_mult
+               proc_fork_connector
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __get_vm_area_node
+            |
+            ---__get_vm_area_node
+               __vmalloc_node_range_noprof
+               __vmalloc_node_noprof
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] alloc_vmap_area
+            |
+            ---alloc_vmap_area
+               __get_vm_area_node
+               __vmalloc_node_range_noprof
+               __vmalloc_node_noprof
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.51%  coro_http_serve  [kernel.kallsyms]     [k] __kmalloc_cache_noprof
+            |
+            ---__kmalloc_cache_noprof
+               find_get_pmu_context
+               inherit_event.isra.0
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.00%  coro_http_serve  [kernel.kallsyms]     [k] __get_random_u32_below
+            |
+            ---__get_random_u32_below
+               allocate_slab
+               ___slab_alloc
+               __slab_alloc.isra.0
+               kmem_cache_alloc_node_noprof
+               perf_event_alloc
+               inherit_event.isra.0
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+     0.51%     0.51%  coro_http_serve  [kernel.kallsyms]     [k] get_random_u32
+            |
+            ---get_random_u32
+               __get_random_u32_below
+               allocate_slab
+               ___slab_alloc
+               __slab_alloc.isra.0
+               kmem_cache_alloc_node_noprof
+               perf_event_alloc
+               inherit_event.isra.0
+               inherit_task_group.isra.0
+               perf_event_init_task
+               copy_process
+               kernel_clone
+               __do_sys_clone3
+               __x64_sys_clone3
+               x64_sys_call
+               do_syscall_64
+               entry_SYSCALL_64_after_hwframe
+               0x7bf1bf129c5d
+               0x7bf1bf09c54f
+               pthread_create
+               std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)())
+               std::thread::thread<coro::net::http::Server::start()::{lambda()#1}, , void>(coro::net::http::Server::start()::{lambda()#1}&&) (inlined)
+               coro::net::http::Server::start()
+               0x7bf1bf4ecdb3
+               0x7bf1bf09caa3
+               0x7bf1bf129c6b
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

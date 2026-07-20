@@ -1,0 +1,45 @@
+# Total samples (merged): 32364364332
+# Unique leaf functions: 204
+
+  Overhead       Samples  Function
+----------  ------------  ------------------------------------------------------------
+    22.02%    7125125118  [libc.so.6]
+     6.46%    2092092090  std::_Sp_counted_base<
+     5.00%    1619619618  std::__cmp_cat::__unspec::__unspec
+     4.76%    1540540539  __gnu_cxx::__atomic_add
+     4.35%    1406406405  malloc
+     3.55%    1150150149  std::__shared_count<
+     2.58%     835835835  pthread_rwlock_unlock
+     2.25%     728728728  unsigned char* std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<char const*, unsigned char*>
+     2.20%     712712712  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::capacity
+     2.03%     657657657  std::basic_filebuf<char, std::char_traits<char> >::xsputn
+     1.99%     645645645  std::ostream::write
+     1.75%     565565565  std::basic_streambuf<char, std::char_traits<char> >::xsputn
+     1.67%     539539539  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::size
+     1.58%     512512512  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare
+     1.51%     489489489  std::basic_streambuf<char, std::char_traits<char> >::xsgetn
+     1.51%     487487487  cfree
+     1.44%     466466466  auto std::__detail::__char_traits_cmp_cat<std::char_traits<char> >
+     1.27%     409409409  pthread_rwlock_wrlock
+     1.25%     404404404  std::__shared_ptr<webserver::storage::SkipListNode, 
+     1.18%     382382382  std::istream::read
+     1.15%     371371371  std::char_traits<char>::assign
+     1.14%     369369369  std::char_traits<char>::compare
+     1.06%     344344344  std::ostream::sentry::sentry
+     1.04%     335335335  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data
+     1.01%     328328328  StorageBenchmark::generate_value[abi:cxx11]
+     0.98%     317317317  pthread_rwlock_rdlock
+     0.95%     308308308  std::basic_filebuf<char, std::char_traits<char> >::xsgetn
+     0.90%     292292292  webserver::storage::SkipList::find_node
+     0.88%     285285285  operator new
+     0.85%     275275275  std::char_traits<char>::copy
+     0.84%     270270270  [[vdso]]
+     0.78%     251251251  operator delete
+     0.74%     238238238  __vdso_clock_gettime
+     0.73%     236236236  pthread_mutex_lock
+     0.69%     224224224  std::codecvt<char, char, __mbstate_t>::do_always_noconv
+     0.65%     210210210  __gnu_cxx::__exchange_and_add_dispatch
+     0.64%     208208208  webserver::storage::StorageEngine::put
+     0.62%     201201201  __gnu_cxx::__atomic_add_dispatch
+     0.61%     198198198  std::istream::sentry::sentry
+     0.57%     184184184  webserver::storage::SkipList::put

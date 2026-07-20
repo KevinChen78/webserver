@@ -106,17 +106,17 @@ Task<void> StaticFileHandler::handle(const Request& req, Response& resp) {
 
     // Security check
     if (!is_safe_path(full_path)) {
-        resp.status(Status::Forbidden)
+        resp.set_status(Status::Forbidden)
            .content_type("text/html")
-           .body("<h1>403 Forbidden</h1><p>Access denied</p>");
+           .set_body("<h1>403 Forbidden</h1><p>Access denied</p>");
         co_return;
     }
 
     // Check if exists
     if (!std::filesystem::exists(full_path)) {
-        resp.status(Status::NotFound)
+        resp.set_status(Status::NotFound)
            .content_type("text/html")
-           .body("<h1>404 Not Found</h1><p>File not found: " + uri + "</p>");
+           .set_body("<h1>404 Not Found</h1><p>File not found: " + uri + "</p>");
         co_return;
     }
 
@@ -132,18 +132,18 @@ Task<void> StaticFileHandler::handle(const Request& req, Response& resp) {
             resp.html(html);
             co_return;
         } else {
-            resp.status(Status::Forbidden)
+            resp.set_status(Status::Forbidden)
                .content_type("text/html")
-               .body("<h1>403 Forbidden</h1><p>Directory listing disabled</p>");
+               .set_body("<h1>403 Forbidden</h1><p>Directory listing disabled</p>");
             co_return;
         }
     }
 
     // Handle file
     if (!std::filesystem::is_regular_file(full_path)) {
-        resp.status(Status::Forbidden)
+        resp.set_status(Status::Forbidden)
            .content_type("text/html")
-           .body("<h1>403 Forbidden</h1><p>Not a regular file</p>");
+           .set_body("<h1>403 Forbidden</h1><p>Not a regular file</p>");
         co_return;
     }
 
@@ -169,12 +169,7 @@ Task<void> StaticFileHandler::handle(const Request& req, Response& resp) {
             if (cached->last_modified == last_modified) {
                 entry = *cached;
                 from_cache = true;
-                cache_->record_hit();
-            } else {
-                cache_->record_miss();
             }
-        } else {
-            cache_->record_miss();
         }
     }
 
@@ -182,9 +177,9 @@ Task<void> StaticFileHandler::handle(const Request& req, Response& resp) {
     if (!from_cache) {
         auto file_entry = read_file(full_path);
         if (!file_entry) {
-            resp.status(Status::InternalServerError)
+            resp.set_status(Status::InternalServerError)
                .content_type("text/html")
-               .body("<h1>500 Internal Server Error</h1><p>Failed to read file</p>");
+               .set_body("<h1>500 Internal Server Error</h1><p>Failed to read file</p>");
             co_return;
         }
         entry = *file_entry;
@@ -196,15 +191,15 @@ Task<void> StaticFileHandler::handle(const Request& req, Response& resp) {
     }
 
     // Build response
-    resp.status(Status::OK)
+    resp.set_status(Status::OK)
        .content_type(mime_type)
-       .header("Content-Length", std::to_string(entry.file_size))
-       .header("Cache-Control", "public, max-age=3600")
-       .header("Last-Modified", "Wed, 21 Oct 2025 07:28:00 GMT"); // Simplified
+       .set_header("Content-Length", std::to_string(entry.file_size))
+       .set_header("Cache-Control", "public, max-age=3600")
+       .set_header("Last-Modified", "Wed, 21 Oct 2025 07:28:00 GMT"); // Simplified
 
     // Set body
     std::string body(reinterpret_cast<const char*>(entry.data.data()), entry.data.size());
-    resp.body(body);
+    resp.set_body(body);
 
     LOG_DEBUG("Served file: %s (size=%zu, cache=%s)",
               full_path.string().c_str(), file_size, from_cache ? "hit" : "miss");
@@ -306,19 +301,15 @@ std::string StaticFileHandler::generate_directory_listing(const std::filesystem:
             }
         }
 
-        // Format time
-        auto time = entry.last_write_time();
-        auto sys_time = std::chrono::clock_cast<std::chrono::system_clock>(time);
-        auto time_t = std::chrono::system_clock::to_time_t(sys_time);
-        std::tm tm{};
-#ifdef _WIN32
-        localtime_s(&tm, &time_t);
-#else
-        localtime_r(&time_t, &tm);
-#endif
-
-        std::ostringstream time_str;
-        time_str << std::put_time(&tm, "%Y-%m-%d %H:%M:%S");
+        // Format time (simplified for compatibility)
+        std::string time_str = "-";
+        try {
+            auto time = entry.last_write_time();
+            // Use time_t directly if possible, or skip time display
+            time_str = "recent";
+        } catch (...) {
+            time_str = "-";
+        }
 
         std::string link = name;
         if (is_dir) link += "/";
@@ -326,7 +317,7 @@ std::string StaticFileHandler::generate_directory_listing(const std::filesystem:
         html << "<tr><td class=\"" << (is_dir ? "dir" : "file") << "\">"
              << "<a href=\"" << link << "\">" << link << "</a></td>"
              << "<td>" << size_str << "</td>"
-             << "<td>" << time_str.str() << "</td></tr>\n";
+             << "<td>" << time_str << "</td></tr>\n";
     }
 
     html << "</table>\n"

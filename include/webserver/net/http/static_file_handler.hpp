@@ -37,16 +37,25 @@ struct FileCacheEntry {
 class StaticFileHandler {
 public:
     struct Config {
-        std::string root_dir = "./www";
-        std::string index_file = "index.html";
-        bool enable_cache = true;
-        size_t cache_size = 100 * 1024 * 1024; // 100MB cache
-        size_t max_file_size = 10 * 1024 * 1024; // 10MB max cached file
-        bool enable_directory_listing = true;
-        bool enable_gzip = false;
+        std::string root_dir;
+        std::string index_file;
+        bool enable_cache;
+        size_t cache_size;
+        size_t max_file_size;
+        bool enable_directory_listing;
+        bool enable_gzip;
+
+        Config()
+            : root_dir("./www"),
+              index_file("index.html"),
+              enable_cache(true),
+              cache_size(100 * 1024 * 1024), // 100MB cache
+              max_file_size(10 * 1024 * 1024), // 10MB max cached file
+              enable_directory_listing(true),
+              enable_gzip(false) {}
     };
 
-    explicit StaticFileHandler(const Config& config = Config{});
+    explicit StaticFileHandler(const Config& config = Config());
 
     // Handle request (Task coroutine)
     Task<void> handle(const Request& req, Response& resp);

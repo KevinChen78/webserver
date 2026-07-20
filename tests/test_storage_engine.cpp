@@ -16,6 +16,7 @@
 #include <vector>
 
 using namespace webserver::storage;
+using namespace webserver::utils;
 using namespace std::chrono;
 
 // Test basic put/get operations
@@ -341,9 +342,9 @@ void test_stats() {
     std::cout << "  ✓ Stats test passed" << std::endl;
 }
 
-// Performance benchmark
+// Performance benchmark (memory mode)
 void test_performance() {
-    std::cout << "Testing performance..." << std::endl;
+    std::cout << "Testing performance (memory mode)..." << std::endl;
 
     std::string test_dir = "./test_storage_perf";
     std::filesystem::remove_all(test_dir);
@@ -392,13 +393,98 @@ void test_performance() {
     std::cout << "  ✓ Performance test completed" << std::endl;
 }
 
+// Production environment performance benchmark
+void test_performance_production() {
+    std::cout << "\n========================================" << std::endl;
+    std::cout << "Testing performance (PRODUCTION mode)..." << std::endl;
+    std::cout << "========================================" << std::endl;
+
+    std::string test_dir = "./test_storage_prod";
+    std::filesystem::remove_all(test_dir);
+
+    StorageEngine::Config config;
+    config.data_dir = test_dir;
+    config.memtable_size = 4 * 1024 * 1024;   // 4MB (trigger flush sooner)
+    config.sstable_size = 16 * 1024 * 1024;   // 16MB SSTable
+    config.enable_wal = true;                  // Enable WAL (durability)
+    config.sync_on_write = false;              // Async WAL (balance performance)
+
+    StorageEngine engine(config);
+    engine.init();
+
+    // Larger dataset to trigger compaction
+    const int num_ops = 500000;
+
+    std::cout << "  Config: memtable=4MB, WAL=enabled, ops=" << num_ops << std::endl;
+
+    // Write benchmark
+    std::cout << "  Phase 1: Write benchmark..." << std::endl;
+    auto start = steady_clock::now();
+    for (int i = 0; i < num_ops; ++i) {
+        std::string key = "prod_key_" + std::to_string(i);
+        std::string value = "prod_value_" + std::to_string(i) + "_" + std::string(100, 'x'); // 100+ bytes value
+        engine.put(key, value);
+
+        // Progress every 100k
+        if ((i + 1) % 100000 == 0) {
+            std::cout << "    Progress: " << (i + 1) / 1000 << "K writes" << std::endl;
+        }
+    }
+    auto write_end = steady_clock::now();
+
+    // Force flush to get real write performance
+    std::cout << "  Phase 2: Sync and flush..." << std::endl;
+    auto stats_before = engine.get_stats();
+    std::cout << "    Memtable entries before flush: " << stats_before.memtable_entries << std::endl;
+
+    // Read benchmark (random access, simulating cache misses)
+    std::cout << "  Phase 3: Read benchmark (random)..." << std::endl;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, num_ops - 1);
+
+    int found_count = 0;
+    auto read_start = steady_clock::now();
+    for (int i = 0; i < num_ops; ++i) {
+        int idx = dis(gen);
+        auto value = engine.get("prod_key_" + std::to_string(idx));
+        if (value) found_count++;
+    }
+    auto read_end = steady_clock::now();
+
+    // Calculate stats
+    auto stats_after = engine.get_stats();
+
+    auto write_time = duration_cast<microseconds>(write_end - start).count();
+    auto read_time = duration_cast<microseconds>(read_end - read_start).count();
+
+    double write_qps = (num_ops * 1000000.0) / write_time;
+    double read_qps = (num_ops * 1000000.0) / read_time;
+
+    std::cout << "\n  ========== RESULTS ==========" << std::endl;
+    std::cout << "  Write: " << write_qps / 1000 << "K ops/sec ("
+              << write_time / num_ops << " us/op)" << std::endl;
+    std::cout << "  Read:  " << read_qps / 1000 << "K ops/sec ("
+              << read_time / num_ops << " us/op)" << std::endl;
+    std::cout << "  Cache hit rate: " << (found_count * 100.0 / num_ops) << "%" << std::endl;
+    std::cout << "  SSTable count: " << stats_after.sstable_count << std::endl;
+    std::cout << "  Total writes: " << stats_after.total_writes << std::endl;
+    std::cout << "  Total reads: " << stats_after.total_reads << std::endl;
+
+    engine.shutdown();
+    std::filesystem::remove_all(test_dir);
+
+    std::cout << "  ✓ Production test completed" << std::endl;
+    std::cout << "========================================" << std::endl;
+}
+
 int main() {
     std::cout << "========================================" << std::endl;
     std::cout << "Storage Engine Unit Tests" << std::endl;
     std::cout << "========================================" << std::endl;
 
     // Initialize logger for tests
-    utils::AsyncLogger::instance().init("./test_logs", "storage_test", utils::LogLevel::WARN);
+    AsyncLogger::instance().init("./test_logs", "storage_test", LogLevel::WARN);
 
     try {
         test_basic_operations();
@@ -409,16 +495,17 @@ int main() {
         test_large_values();
         test_stats();
         test_performance();
+        test_performance_production();
 
         std::cout << "\n========================================" << std::endl;
         std::cout << "All tests passed!" << std::endl;
         std::cout << "========================================" << std::endl;
 
-        utils::AsyncLogger::instance().shutdown();
+        AsyncLogger::instance().shutdown();
         return 0;
     } catch (const std::exception& e) {
         std::cerr << "Test failed with exception: " << e.what() << std::endl;
-        utils::AsyncLogger::instance().shutdown();
+        AsyncLogger::instance().shutdown();
         return 1;
     }
 }

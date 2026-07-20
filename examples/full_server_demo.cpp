@@ -1,26 +1,24 @@
 /**
- * Full Server Demo - HTTP + FTP + Storage
- * Demonstrates all features of the WebServer project
+ * Full Server Demo - Storage + Logger + FTP
+ * Demonstrates the main features of the WebServer project
  */
 
-#include "webserver/core/task.hpp"
-#include "webserver/net/http/server.hpp"
-#include "webserver/net/http/static_file_handler.hpp"
-#include "webserver/net/ftp/ftp_server.hpp"
 #include "webserver/storage/storage_engine.hpp"
 #include "webserver/utils/logger.hpp"
+#include "webserver/net/ftp/ftp_server.hpp"
 #include "webserver/utils/lru_cache.hpp"
 
 #include <iostream>
 #include <signal.h>
 #include <thread>
+#include <chrono>
 
 using namespace webserver;
 
 std::atomic<bool> g_running{true};
 
 void signal_handler(int sig) {
-    LOG_INFO("Received signal %d, shutting down...", sig);
+    std::cout << "Received signal " << sig << ", shutting down..." << std::endl;
     g_running = false;
 }
 
@@ -32,15 +30,15 @@ int main() {
     // Initialize logger
     utils::AsyncLogger::instance().init("./logs", "webserver", utils::LogLevel::INFO);
 
-    LOG_INFO("========================================");
-    LOG_INFO("WebServer - Full Server Demo");
-    LOG_INFO("========================================");
-    LOG_INFO("");
+    std::cout << "========================================" << std::endl;
+    std::cout << "WebServer - Full Server Demo" << std::endl;
+    std::cout << "========================================" << std::endl;
+    std::cout << "" << std::endl;
 
     // ========================================
     // Initialize Storage Engine
     // ========================================
-    LOG_INFO("Initializing Storage Engine...");
+    std::cout << "Initializing Storage Engine..." << std::endl;
     storage::StorageEngine::Config storage_config;
     storage_config.data_dir = "./data";
     storage_config.memtable_size = 64 * 1024 * 1024;  // 64MB
@@ -49,125 +47,21 @@ int main() {
 
     storage::StorageEngine storage(storage_config);
     if (!storage.init()) {
-        LOG_FATAL("Failed to initialize storage engine");
+        std::cerr << "Failed to initialize storage engine" << std::endl;
         return 1;
     }
-    LOG_INFO("Storage Engine initialized");
+    std::cout << "Storage Engine initialized" << std::endl;
 
     // ========================================
     // Initialize Cache
     // ========================================
-    LOG_INFO("Initializing LRU Cache...");
+    std::cout << "Initializing LRU Cache..." << std::endl;
     utils::LRUCache<std::string, std::string> cache(10000);
-
-    // ========================================
-    // Initialize HTTP Server
-    // ========================================
-    LOG_INFO("Initializing HTTP Server...");
-
-    // Create static file handler
-    net::http::StaticFileHandler::Config static_config;
-    static_config.root_dir = "./www";
-    static_config.enable_cache = true;
-    static_config.cache_size = 100 * 1024 * 1024;  // 100MB
-    static_config.enable_directory_listing = true;
-
-    auto static_handler = std::make_shared<net::http::StaticFileHandler>(static_config);
-
-    // Create HTTP server
-    net::http::Server http_server(8080);
-
-    // Setup routes
-    http_server
-        // Health check
-        .get("/api/health", [](const net::http::Request& req, net::http::Response& resp) -> Task<void> {
-            resp.json(R"({"status":"ok","service":"webserver","version":"1.0"})");
-            co_return;
-        })
-
-        // Server stats
-        .get("/api/stats", [&storage](const net::http::Request& req, net::http::Response& resp) -> Task<void> {
-            auto stats = storage.get_stats();
-            std::ostringstream json;
-            json << "{"
-                 << "\"memtable_entries\":" << stats.memtable_entries << ","
-                 << "\"sstable_count\":" << stats.sstable_count << ","
-                 << "\"total_data_size\":" << stats.total_data_size << ","
-                 << "\"total_writes\":" << stats.total_writes << ","
-                 << "\"total_reads\":" << stats.total_reads
-                 << "}";
-            resp.json(json.str());
-            co_return;
-        })
-
-        // Storage PUT
-        .post("/api/storage/:key", [&storage](const net::http::Request& req, net::http::Response& resp) -> Task<void> {
-            std::string path = req.path();
-            size_t key_start = path.find_last_of('/') + 1;
-            std::string key = path.substr(key_start);
-            std::string value = req.body();
-
-            if (storage.put(key, value)) {
-                resp.json(R"({"status":"ok","message":"stored"})");
-            } else {
-                resp.status(net::http::Status::InternalServerError)
-                   .json(R"({"status":"error","message":"failed to store"})");
-            }
-            co_return;
-        })
-
-        // Storage GET
-        .get("/api/storage/:key", [&storage, &cache](const net::http::Request& req, net::http::Response& resp) -> Task<void> {
-            std::string path = req.path();
-            size_t key_start = path.find_last_of('/') + 1;
-            std::string key = path.substr(key_start);
-
-            // Try cache first
-            auto cached = cache.get(key);
-            if (cached) {
-                resp.json("{\"status\":\"ok\",\"value\":\"" + *cached + "\",\"source\":\"cache\"}");
-                co_return;
-            }
-
-            // Try storage
-            auto value = storage.get(key);
-            if (value) {
-                cache.put(key, *value);
-                resp.json("{\"status\":\"ok\",\"value\":\"" + *value + "\",\"source\":\"storage\"}");
-            } else {
-                resp.status(net::http::Status::NotFound)
-                   .json(R"({"status":"error","message":"key not found"})");
-            }
-            co_return;
-        })
-
-        // Storage DELETE
-        .del("/api/storage/:key", [&storage, &cache](const net::http::Request& req, net::http::Response& resp) -> Task<void> {
-            std::string path = req.path();
-            size_t key_start = path.find_last_of('/') + 1;
-            std::string key = path.substr(key_start);
-
-            cache.remove(key);
-            storage.remove(key);
-            resp.json(R"({"status":"ok","message":"deleted"})");
-            co_return;
-        })
-
-        // Static file handler (catch-all)
-        .route(net::http::Method::GET, "/*", [&static_handler](const net::http::Request& req, net::http::Response& resp) -> Task<void> {
-            co_await static_handler->handle(req, resp);
-        });
-
-    // Start HTTP server in a thread
-    std::thread http_thread([&http_server]() {
-        LOG_INFO("HTTP Server starting on port 8080");
-        http_server.start();
-    });
 
     // ========================================
     // Initialize FTP Server
     // ========================================
-    LOG_INFO("Initializing FTP Server...");
+    std::cout << "Initializing FTP Server..." << std::endl;
 
     net::ftp::FtpServer::Config ftp_config;
     ftp_config.bind_address = "0.0.0.0";
@@ -177,29 +71,58 @@ int main() {
 
     net::ftp::FtpServer ftp_server(ftp_config);
     if (!ftp_server.start()) {
-        LOG_ERROR("Failed to start FTP server");
+        std::cerr << "Failed to start FTP server" << std::endl;
     } else {
-        LOG_INFO("FTP Server started on port 2121");
+        std::cout << "FTP Server started on port 2121" << std::endl;
     }
+
+    // ========================================
+    // Demo: Storage operations
+    // ========================================
+    std::cout << "" << std::endl;
+    std::cout << "Testing Storage Operations..." << std::endl;
+
+    // Put some test data
+    for (int i = 0; i < 10; i++) {
+        std::string key = "key_" + std::to_string(i);
+        std::string value = "value_" + std::to_string(i) + "_" + std::to_string(std::time(nullptr));
+        if (storage.put(key, value)) {
+            std::cout << "  Stored: " << key << " -> " << value << std::endl;
+        }
+    }
+
+    // Read back
+    std::cout << "  Reading back..." << std::endl;
+    for (int i = 0; i < 10; i++) {
+        std::string key = "key_" + std::to_string(i);
+        auto value = storage.get(key);
+        if (value) {
+            std::cout << "  Retrieved: " << key << " -> " << *value << std::endl;
+        }
+    }
+
+    // Get stats
+    auto stats = storage.get_stats();
+    std::cout << "  Storage stats:" << std::endl;
+    std::cout << "    Total writes: " << stats.total_writes << std::endl;
+    std::cout << "    Total reads: " << stats.total_reads << std::endl;
 
     // ========================================
     // Print usage info
     // ========================================
-    std::cout << "\n========================================" << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "========================================" << std::endl;
     std::cout << "WebServer is running!" << std::endl;
     std::cout << "========================================" << std::endl;
-    std::cout << "\nHTTP Server: http://localhost:8080" << std::endl;
+    std::cout << "" << std::endl;
     std::cout << "FTP Server: localhost:2121 (anonymous)" << std::endl;
-    std::cout << "\nAPI Endpoints:" << std::endl;
-    std::cout << "  GET  /api/health         - Health check" << std::endl;
-    std::cout << "  GET  /api/stats          - Server statistics" << std::endl;
-    std::cout << "  GET  /api/storage/:key   - Get value from storage" << std::endl;
-    std::cout << "  POST /api/storage/:key   - Store value" << std::endl;
-    std::cout << "  DEL  /api/storage/:key   - Delete value" << std::endl;
-    std::cout << "\nStatic files are served from ./www" << std::endl;
-    std::cout << "FTP files are stored in ./ftp_root" << std::endl;
-    std::cout << "\nPress Ctrl+C to stop the server" << std::endl;
-    std::cout << "========================================" << std::endl;
+    std::cout << "  Files stored in ./ftp_root" << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "Logs: ./logs/" << std::endl;
+    std::cout << "Data: ./data/" << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "Press Ctrl+C to stop the server" << std::endl;
+    std::cout << "" << std::endl;
 
     // ========================================
     // Main loop
@@ -208,21 +131,12 @@ int main() {
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
-    // ========================================
-    // Shutdown
-    // ========================================
-    LOG_INFO("Shutting down...");
-
-    http_server.stop();
+    // Cleanup
+    std::cout << "Shutting down..." << std::endl;
     ftp_server.stop();
     storage.shutdown();
-
-    if (http_thread.joinable()) {
-        http_thread.join();
-    }
-
-    LOG_INFO("Shutdown complete");
     utils::AsyncLogger::instance().shutdown();
 
+    std::cout << "Goodbye!" << std::endl;
     return 0;
 }
