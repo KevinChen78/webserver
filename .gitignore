@@ -24,12 +24,9 @@ examples/CMakeLists_test.txt
 EOF
 
 # Profiling raw data (keep REPORT.md, score.py, flamegraph.svg, top-*.txt, scores.json)
-profiling/**/perf.data
-profiling/**/perf.data.old
-profiling/**/perf.*.data
-profiling/**/perf.*.data.old
-profiling/**/perf.*.script
-profiling/**/perf.script
+profiling/**/perf*.data
+profiling/**/perf*.data.old
+profiling/**/perf*.script
 profiling/**/folded.txt
 profiling/**/*.out
 profiling/**/benchmark_data/
